@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MT.Utilities.Results;
 using MT.Utilities.StringValidators.Strategies;
+using MT.Utilities.StringValidators.Builders;
 
 namespace MT.Utilities.StringValidators.Builders
 {
@@ -45,20 +46,24 @@ namespace MT.Utilities.StringValidators.Builders
         }
 
         /// <summary>
-        /// 執行所有驗證策略，回傳所有錯誤訊息（List 形式）。
+        /// 從 JSON 字串建立 ValidationBuilder 實例。
         /// </summary>
-        /// <param name="value">要驗證的字串值。</param>
-        /// <returns>Tuple: 是否成功, 錯誤訊息清單。</returns>
-        public (bool IsSuccess, List<string> Errors) ValidateAllWithList(string? value)
+        /// <param name="json">JSON 字串，描述驗證策略清單。</param>
+        /// <returns>ValidationBuilder 實例。</returns>
+        public static ValidationBuilder FromJson(string json)
         {
-            var errors = new List<string>();
-            foreach (var strategy in _strategies)
+            var builder = new ValidationBuilder();
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<ValidationStrategyDto>>(json);
+            if (items == null) return builder;
+            foreach (var item in items)
             {
-                var error = strategy.Validate(value);
-                if (!string.IsNullOrWhiteSpace(error))
-                    errors.Add(error);
+                if (string.IsNullOrWhiteSpace(item.Type)) continue;
+                if (!StrategyFactoryRegistry.TryGetFactory(item.Type, out var factory) || factory == null)
+                    continue;
+                var param = item.Params ?? new Dictionary<string, object>();
+                builder.AddStrategy(factory(param));
             }
-            return (errors.Count == 0, errors);
+            return builder;
         }
     }
 }

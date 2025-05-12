@@ -9,6 +9,10 @@ namespace MT.Utilities.StringValidators.Strategies
     {
         public Delegate? ErrorMessageDelegate { get; set; }
 
+        /// <summary>
+        /// Email 驗證策略
+        /// </summary>
+        /// <param name="errorMessageDelegate"></param>
         public EmailValidationStrategy(Func<string, string>? errorMessageDelegate = null)
         {
             ErrorMessageDelegate = errorMessageDelegate;
