@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using MT.Utilities.Results;
-using MT.Utilities.Validators.Strategies;
+using MT.Utilities.StringValidators.Strategies;
 
-namespace MT.Utilities.Validators.Builders
+namespace MT.Utilities.StringValidators.Builders
 {
     /// <summary>
     /// 驗證建造者，負責組合多個驗證策略並執行驗證。

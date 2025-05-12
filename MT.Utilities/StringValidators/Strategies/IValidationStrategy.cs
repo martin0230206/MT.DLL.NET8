@@ -1,4 +1,4 @@
-namespace MT.Utilities.Validators.Strategies
+namespace MT.Utilities.StringValidators.Strategies
 {
     /// <summary>
     /// 驗證策略介面，定義驗證方法。

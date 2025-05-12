@@ -1,6 +1,6 @@
 using System;
 
-namespace MT.Utilities.Validators.Strategies
+namespace MT.Utilities.StringValidators.Strategies
 {
     /// <summary>
     /// 最小長度驗證策略，可自訂最小長度與錯誤訊息委派。
