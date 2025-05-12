@@ -1,11 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+		<!-- 產生 docstring -->
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-  </PropertyGroup>
-
+		<!-- 套件/元件的版本號 -->
+		<Version>0.0.1</Version>
+		<!-- 組件版本（CLR用） -->
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<!-- 檔案版本（Windows用） -->
+		<FileVersion>0.0.1</FileVersion>
+		<!-- 顯示給使用者看的版本，可含字串 -->
+		<InformationalVersion>0.0.1</InformationalVersion>
+	</PropertyGroup>
 </Project>
