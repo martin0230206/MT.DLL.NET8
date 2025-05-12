@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using MT.Utilities.StringValidators.Strategies;
 
 namespace MT.Utilities.StringValidators.Builders
@@ -9,13 +10,23 @@ namespace MT.Utilities.StringValidators.Builders
     /// </summary>
     public static class StrategyFactoryRegistry
     {
+        internal static int GetMinLengthFromParams(Dictionary<string, object> dict)
+        {
+            object minLengthObj = dict["minLength"];
+            if (minLengthObj is JsonElement je && je.ValueKind == JsonValueKind.Number)
+            {
+                return je.GetInt32();
+            }
+            return Convert.ToInt32(minLengthObj);
+        }
+
         private static readonly Dictionary<string, Func<Dictionary<string, object>, IValidationStrategy>> _factories =
             new(StringComparer.OrdinalIgnoreCase)
             {
                 ["Email"] = _ => new EmailValidationStrategy(),
                 ["MinLength"] = dict =>
                 {
-                    var minLength = dict.ContainsKey("minLength") ? Convert.ToInt32(dict["minLength"]) : throw new ArgumentException("minLength is required");
+                    int minLength = GetMinLengthFromParams(dict);
                     return new MinLengthValidationStrategy(minLength);
                 }
             };
