@@ -10,7 +10,7 @@ namespace MT.Utilities.Test.StringValidators.Builders
         [Fact]
         public void ValidateAll_多策略_回傳所有錯誤訊息()
         {
-            var builder = new ValidationBuilder()
+            var builder = new StringValidationBuilder()
                 .AddStrategy(new MinLengthValidationStrategy(5))
                 .AddStrategy(new EmailValidationStrategy());
             var result = builder.ValidateAll("a@b");
@@ -22,7 +22,7 @@ namespace MT.Utilities.Test.StringValidators.Builders
         [Fact]
         public void ValidateAll_全部通過_回傳Success()
         {
-            var builder = new ValidationBuilder()
+            var builder = new StringValidationBuilder()
                 .AddStrategy(new MinLengthValidationStrategy(5))
                 .AddStrategy(new EmailValidationStrategy());
             var result = builder.ValidateAll("abcde@x.com");
@@ -34,7 +34,7 @@ namespace MT.Utilities.Test.StringValidators.Builders
         public void FromJson_建立Builder_可正確驗證()
         {
             string json = "[{'Type':'MinLength','Params':{'minLength':3}},{'Type':'Email'}]".Replace("'", "\"");
-            var builder = ValidationBuilder.FromJson(json);
+            var builder = StringValidationBuilder.FromJson(json);
             var result = builder.ValidateAll("a@b");
             Assert.False(result.IsSuccess);
             Assert.Contains("Email 格式錯誤", result.ErrorMessage);

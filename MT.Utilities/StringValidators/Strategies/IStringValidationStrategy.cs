@@ -3,7 +3,7 @@ namespace MT.Utilities.StringValidators.Strategies
     /// <summary>
     /// 驗證策略介面，定義驗證方法。
     /// </summary>
-    public interface IValidationStrategy
+    public interface IStringValidationStrategy
     {
         /// <summary>
         /// 驗證指定的字串值，回傳錯誤訊息，若通過則為 null。

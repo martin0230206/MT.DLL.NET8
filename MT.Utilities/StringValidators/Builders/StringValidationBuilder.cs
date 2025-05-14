@@ -8,19 +8,19 @@ namespace MT.Utilities.StringValidators.Builders
     /// <summary>
     /// 驗證建造者，負責組合多個驗證策略並執行驗證。
     /// </summary>
-    public class ValidationBuilder
+    public class StringValidationBuilder
     {
         /// <summary>
         /// 儲存所有加入的驗證策略。
         /// </summary>
-        private readonly List<IValidationStrategy> _strategies = new();
+        private readonly List<IStringValidationStrategy> _strategies = new();
 
         /// <summary>
         /// 新增一個驗證策略。
         /// </summary>
         /// <param name="strategy">要加入的驗證策略。</param>
         /// <returns>回傳自身以便鏈式呼叫。</returns>
-        public ValidationBuilder AddStrategy(IValidationStrategy strategy)
+        public StringValidationBuilder AddStrategy(IStringValidationStrategy strategy)
         {
             _strategies.Add(strategy);
             return this;
@@ -50,9 +50,9 @@ namespace MT.Utilities.StringValidators.Builders
         /// </summary>
         /// <param name="json">JSON 字串，描述驗證策略清單。</param>
         /// <returns>ValidationBuilder 實例。</returns>
-        public static ValidationBuilder FromJson(string json)
+        public static StringValidationBuilder FromJson(string json)
         {
-            var builder = new ValidationBuilder();
+            var builder = new StringValidationBuilder();
             var items = System.Text.Json.JsonSerializer.Deserialize<List<ValidationStrategyDto>>(json);
             if (items == null) return builder;
             foreach (var item in items)

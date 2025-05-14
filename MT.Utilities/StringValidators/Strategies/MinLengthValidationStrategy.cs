@@ -5,7 +5,7 @@ namespace MT.Utilities.StringValidators.Strategies
     /// <summary>
     /// 最小長度驗證策略，可自訂最小長度與錯誤訊息委派。
     /// </summary>
-    public class MinLengthValidationStrategy : IValidationStrategy
+    public class MinLengthValidationStrategy : IStringValidationStrategy
     {
         public Delegate? ErrorMessageDelegate { get; set; }
         /// <summary>

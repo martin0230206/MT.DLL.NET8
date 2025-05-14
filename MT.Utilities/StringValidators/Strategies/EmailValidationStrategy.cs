@@ -5,7 +5,7 @@ namespace MT.Utilities.StringValidators.Strategies
     /// <summary>
     /// Email 驗證策略，判斷字串是否為合法 Email 格式。
     /// </summary>
-    public partial class EmailValidationStrategy : IValidationStrategy
+    public partial class EmailValidationStrategy : IStringValidationStrategy
     {
         public Delegate? ErrorMessageDelegate { get; set; }
 

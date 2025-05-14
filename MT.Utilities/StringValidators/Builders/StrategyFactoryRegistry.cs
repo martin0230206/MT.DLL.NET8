@@ -20,7 +20,7 @@ namespace MT.Utilities.StringValidators.Builders
             return Convert.ToInt32(minLengthObj);
         }
 
-        private static readonly Dictionary<string, Func<Dictionary<string, object>, IValidationStrategy>> _factories =
+        private static readonly Dictionary<string, Func<Dictionary<string, object>, IStringValidationStrategy>> _factories =
             new(StringComparer.OrdinalIgnoreCase)
             {
                 ["Email"] = _ => new EmailValidationStrategy(),
@@ -34,7 +34,7 @@ namespace MT.Utilities.StringValidators.Builders
         /// <summary>
         /// 嘗試取得對應 type 的策略工廠。
         /// </summary>
-        public static bool TryGetFactory(string type, out Func<Dictionary<string, object>, IValidationStrategy>? factory)
+        public static bool TryGetFactory(string type, out Func<Dictionary<string, object>, IStringValidationStrategy>? factory)
         {
             return _factories.TryGetValue(type, out factory);
         }
